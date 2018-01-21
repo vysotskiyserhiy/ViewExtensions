@@ -1,6 +1,6 @@
 use_frameworks!
 target 'ViewExtensions_Tests' do
-  pod 'ViewExtensions', :path => '../'
-  
+  pod 'ViewExtensions', path: '../' 
+  pod 'Atom'
   
 end
