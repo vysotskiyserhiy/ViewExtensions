@@ -65,6 +65,7 @@ public extension UIView {
         }
     }
     
+    @discardableResult
     public func recognize(_ gesture: Gesture, target: Any, action: Selector) -> UIGestureRecognizer {
         let recognizer = gesture.gesture
         recognizer.addTarget(target, action: action)
@@ -73,6 +74,7 @@ public extension UIView {
         return recognizer
     }
     
+    @discardableResult
     public func recognize(_ gesture: Gesture, handler: @escaping () -> ()) -> UIGestureRecognizer {
         let recognizer = gesture.gesture
         recognizer.addTarget(self, action: #selector(_callHandler(_:)))
