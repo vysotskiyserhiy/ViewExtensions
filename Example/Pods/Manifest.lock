@@ -1,0 +1,20 @@
+PODS:
+  - Atom (0.1.2)
+  - ViewExtensions (0.1.0):
+    - Atom
+
+DEPENDENCIES:
+  - Atom
+  - ViewExtensions (from `../`)
+
+EXTERNAL SOURCES:
+  ViewExtensions:
+    :path: ../
+
+SPEC CHECKSUMS:
+  Atom: 5429f2ee7ad10ea170b070f63da0b7ea54e595ca
+  ViewExtensions: e5d6353d89299dad83a69eb19a1aa89dad120d0c
+
+PODFILE CHECKSUM: bc5189838e78f929854f51ace0c518787c9778a3
+
+COCOAPODS: 1.4.0
