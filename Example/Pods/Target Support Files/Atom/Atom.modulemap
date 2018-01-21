@@ -1,6 +1,0 @@
-framework module Atom {
-  umbrella header "Atom-umbrella.h"
-
-  export *
-  module * { export * }
-}

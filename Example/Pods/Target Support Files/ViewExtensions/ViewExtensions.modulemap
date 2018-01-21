@@ -1,6 +1,0 @@
-framework module ViewExtensions {
-  umbrella header "ViewExtensions-umbrella.h"
-
-  export *
-  module * { export * }
-}
