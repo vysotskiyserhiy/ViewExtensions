@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'ViewExtensions'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = 'UIView Extensions'
   s.homepage         = 'https://github.com/vysotskiyserhiy/ViewExtensions'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
@@ -10,4 +10,5 @@ Pod::Spec.new do |s|
   s.source_files = 'ViewExtensions/Classes/**/*'
   s.frameworks = 'UIKit'
   s.dependency 'Atom'
+  s.dependency 'RxSwift'
 end

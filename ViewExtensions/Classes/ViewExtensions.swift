@@ -7,11 +7,13 @@
 //
 
 import UIKit.UIView
+import RxSwift
 import Atom
 
 // MARK: - Gestures
 public extension UIView {
     private static var _handlers: Atomic<[String: [String: () -> ()]]> = Atomic([:])
+    private static var _rxHandlers: Atomic<[String: [String: Variable<()>]]> = Atomic([:])
     
     public enum Gesture {
         case tap
@@ -65,6 +67,21 @@ public extension UIView {
         }
     }
     
+    func observe(_ gesture: Gesture) -> Observable<()> {
+        let variable = Variable(())
+        
+        let recognizer = gesture.gesture
+        recognizer.addTarget(self, action: #selector(_callRxHandler(_:)))
+        addGestureRecognizer(recognizer)
+        isUserInteractionEnabled = true
+        
+        UIView._rxHandlers.mutate {
+            $0[hashString, default: [:]][recognizer.hashString] = variable
+        }
+        
+        return variable.asObservable()
+    }
+    
     @discardableResult
     public func recognize(_ gesture: Gesture, target: Any, action: Selector) -> UIGestureRecognizer {
         let recognizer = gesture.gesture
@@ -88,10 +105,20 @@ public extension UIView {
         return recognizer
     }
     
+    func removeRecognizers() {
+        let recognizers = UIView._handlers.mutate { $0.removeValue(forKey: hashString) } ?? [:]
+        let rxRecognizers = UIView._rxHandlers.mutate { $0.removeValue(forKey: hashString) } ?? [:]
+        let keys = Set(recognizers.keys).union(Set(rxRecognizers.keys))
+        gestureRecognizers?.filter { keys.contains($0.hashString) }.forEach { removeGestureRecognizer($0) }
+    }
+    
     @objc private func _callHandler(_ sender: UIGestureRecognizer) {
         UIView._handlers.value[hashString]?[sender.hashString]?()
     }
     
+    @objc private func _callRxHandler(_ sender: UIGestureRecognizer) {
+        UIView._rxHandlers.value[hashString]?[sender.hashString]?.value = ()
+    }
 }
 
 
