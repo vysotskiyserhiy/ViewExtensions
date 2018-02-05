@@ -48,6 +48,7 @@ public extension UIView {
         let variable = Variable(())
         
         let recognizer = gesture.gesture
+        setup(recognizer)
         recognizer.addTarget(self, action: #selector(_callRxHandler(_:)))
         addGestureRecognizer(recognizer)
         isUserInteractionEnabled = true
@@ -62,6 +63,7 @@ public extension UIView {
     @discardableResult
     public func recognize(_ gesture: Gesture, target: Any, action: Selector, setup: (UIGestureRecognizer) -> () = { _ in }) -> UIGestureRecognizer {
         let recognizer = gesture.gesture
+        setup(recognizer)
         recognizer.addTarget(target, action: action)
         addGestureRecognizer(recognizer)
         isUserInteractionEnabled = true
@@ -71,6 +73,7 @@ public extension UIView {
     @discardableResult
     public func recognize(_ gesture: Gesture, setup: (UIGestureRecognizer) -> () = { _ in }, handler: @escaping () -> ()) -> UIGestureRecognizer {
         let recognizer = gesture.gesture
+        setup(recognizer)
         recognizer.addTarget(self, action: #selector(_callHandler(_:)))
         addGestureRecognizer(recognizer)
         isUserInteractionEnabled = true

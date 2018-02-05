@@ -1,7 +1,7 @@
 PODS:
   - Atom (0.1.2)
   - RxSwift (4.1.1)
-  - ViewExtensions (0.1.2):
+  - ViewExtensions (0.1.3):
     - Atom
     - RxSwift
 
@@ -16,7 +16,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Atom: 5429f2ee7ad10ea170b070f63da0b7ea54e595ca
   RxSwift: c6e3b1c7b325c7d121cd4327e9d98b7ed746b570
-  ViewExtensions: a395743d180b1fba33eba247af48cc308a964c72
+  ViewExtensions: 91d68c9264a406349e45afb250bc35b321cbb1f5
 
 PODFILE CHECKSUM: bc5189838e78f929854f51ace0c518787c9778a3
 
