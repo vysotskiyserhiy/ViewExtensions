@@ -24,7 +24,7 @@ public extension UIView {
         case swipe
         case screenEdgePan
         
-        public var gesture: UIGestureRecognizer {
+        var gesture: UIGestureRecognizer {
             switch self {
             case .tap:
                 return UITapGestureRecognizer()
@@ -42,32 +42,9 @@ public extension UIView {
                 return UIScreenEdgePanGestureRecognizer()
             }
         }
-        
-        public init?(gesture: UIGestureRecognizer) {
-            switch gesture {
-            case is UITapGestureRecognizer:
-                self = .tap
-            case is UIPanGestureRecognizer:
-                self = .pan
-            case is UIPinchGestureRecognizer:
-                self = .pinch
-            case is UILongPressGestureRecognizer:
-                self = .longPress
-            case is UIRotationGestureRecognizer:
-                self = .rotation
-            case is UITapGestureRecognizer:
-                self = .tap
-            case is UISwipeGestureRecognizer:
-                self = .swipe
-            case is UIScreenEdgePanGestureRecognizer:
-                self = .screenEdgePan
-            default:
-                return nil
-            }
-        }
     }
     
-    func observe(_ gesture: Gesture) -> Observable<()> {
+    func observe(_ gesture: Gesture, setup: (UIGestureRecognizer) -> () = { _ in }) -> Observable<()> {
         let variable = Variable(())
         
         let recognizer = gesture.gesture
@@ -83,7 +60,7 @@ public extension UIView {
     }
     
     @discardableResult
-    public func recognize(_ gesture: Gesture, target: Any, action: Selector) -> UIGestureRecognizer {
+    public func recognize(_ gesture: Gesture, target: Any, action: Selector, setup: (UIGestureRecognizer) -> () = { _ in }) -> UIGestureRecognizer {
         let recognizer = gesture.gesture
         recognizer.addTarget(target, action: action)
         addGestureRecognizer(recognizer)
@@ -92,7 +69,7 @@ public extension UIView {
     }
     
     @discardableResult
-    public func recognize(_ gesture: Gesture, handler: @escaping () -> ()) -> UIGestureRecognizer {
+    public func recognize(_ gesture: Gesture, setup: (UIGestureRecognizer) -> () = { _ in }, handler: @escaping () -> ()) -> UIGestureRecognizer {
         let recognizer = gesture.gesture
         recognizer.addTarget(self, action: #selector(_callHandler(_:)))
         addGestureRecognizer(recognizer)
