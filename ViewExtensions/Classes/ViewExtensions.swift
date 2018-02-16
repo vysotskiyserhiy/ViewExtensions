@@ -15,7 +15,7 @@ public extension UIView {
     private static var _handlers: Atomic<[String: [String: () -> ()]]> = Atomic([:])
     private static var _rxHandlers: Atomic<[String: [String: Variable<()>]]> = Atomic([:])
     
-    private static var _removeHandlers: Atomic<[String: () -> ()]> = Atomic([:])
+    private static var _removeHandlers: Atomic<[String: [String: () -> ()]]> = Atomic([:])
     
     public enum Gesture {
         case tap
@@ -60,7 +60,7 @@ public extension UIView {
         }
         
         UIView._removeHandlers.mutate { (val) in
-            val[hashString + recognizer.hashString] = { [weak recognizer] in
+            val[hashString, default: [:]][recognizer.hashString] = { [weak recognizer] in
                 recognizer?.removeTarget(self, action: #selector(UIView._callRxHandler(_:)))
             }
         }
@@ -77,7 +77,7 @@ public extension UIView {
         isUserInteractionEnabled = true
         
         UIView._removeHandlers.mutate { (val) in
-            val[hashString + recognizer.hashString] = { [weak recognizer] in
+            val[hashString, default: [:]][recognizer.hashString] = { [weak recognizer] in
                 recognizer?.removeTarget(target, action: action)
             }
         }
@@ -98,7 +98,7 @@ public extension UIView {
         }
         
         UIView._removeHandlers.mutate { (val) in
-            val[hashString + recognizer.hashString] = { [weak recognizer] in
+            val[hashString, default: [:]][recognizer.hashString] = { [weak recognizer] in
                 recognizer?.removeTarget(self, action: #selector(UIView._callHandler(_:)))
             }
         }
@@ -107,10 +107,9 @@ public extension UIView {
     }
     
     func removeRecognizers() {
-        UIView._removeHandlers.value.values.forEach({$0()})
-        UIView._removeHandlers.mutate { $0 = [:] }
-        UIView._handlers.mutate { $0 = [:] }
-        UIView._rxHandlers.mutate { $0 = [:] }
+        UIView._removeHandlers.mutate { $0.removeValue(forKey: hashString)?.valuesArray.forEach({$0()}) }
+        UIView._handlers.mutate { $0[hashString] = [:] }
+        UIView._rxHandlers.mutate { $0[hashString] = [:] }
     }
     
     @objc private func _callHandler(_ sender: UIGestureRecognizer) {
@@ -184,3 +183,12 @@ extension Hashable {
     }
 }
 
+extension Dictionary {
+    var keySet: Set<Key> {
+        return Set(keys)
+    }
+    
+    var valuesArray: [Value] {
+        return Array(values)
+    }
+}
