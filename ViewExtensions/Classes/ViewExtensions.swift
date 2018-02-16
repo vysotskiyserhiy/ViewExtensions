@@ -110,7 +110,7 @@ public extension UIView {
         isUserInteractionEnabled = true
         
         UIView._removeHandlers.mutate { (val) in
-            val[hashString, default: [:]][gesture] = { [weak recognizer, weak self] in
+            val[hashString, default: [:]][gesture] = { [weak recognizer] in
 //                print("Removing handler on view \(self?.hashString ?? "nil"), for gesture \(gesture)")
                 recognizer?.removeTarget(target, action: action)
             }
