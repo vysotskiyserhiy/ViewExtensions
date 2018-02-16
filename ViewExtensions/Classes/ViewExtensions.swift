@@ -15,6 +15,8 @@ public extension UIView {
     private static var _handlers: Atomic<[String: [String: () -> ()]]> = Atomic([:])
     private static var _rxHandlers: Atomic<[String: [String: Variable<()>]]> = Atomic([:])
     
+    private static var _removeHandlers: Atomic<[String: () -> ()]> = Atomic([:])
+    
     public enum Gesture {
         case tap
         case pan
@@ -57,6 +59,12 @@ public extension UIView {
             $0[hashString, default: [:]][recognizer.hashString] = variable
         }
         
+        UIView._removeHandlers.mutate { (val) in
+            val[hashString + recognizer.hashString] = { [weak recognizer] in
+                recognizer?.removeTarget(self, action: #selector(UIView._callRxHandler(_:)))
+            }
+        }
+        
         return variable.asObservable()
     }
     
@@ -67,6 +75,13 @@ public extension UIView {
         recognizer.addTarget(target, action: action)
         addGestureRecognizer(recognizer)
         isUserInteractionEnabled = true
+        
+        UIView._removeHandlers.mutate { (val) in
+            val[hashString + recognizer.hashString] = { [weak recognizer] in
+                recognizer?.removeTarget(target, action: action)
+            }
+        }
+        
         return recognizer
     }
     
@@ -82,14 +97,20 @@ public extension UIView {
             $0[hashString, default: [:]][recognizer.hashString] = handler
         }
         
+        UIView._removeHandlers.mutate { (val) in
+            val[hashString + recognizer.hashString] = { [weak recognizer] in
+                recognizer?.removeTarget(self, action: #selector(UIView._callHandler(_:)))
+            }
+        }
+        
         return recognizer
     }
     
     func removeRecognizers() {
-        let recognizers = UIView._handlers.mutate { $0.removeValue(forKey: hashString) } ?? [:]
-        let rxRecognizers = UIView._rxHandlers.mutate { $0.removeValue(forKey: hashString) } ?? [:]
-        let keys = Set(recognizers.keys).union(Set(rxRecognizers.keys))
-        gestureRecognizers?.filter { keys.contains($0.hashString) }.forEach { removeGestureRecognizer($0) }
+        UIView._removeHandlers.value.values.forEach({$0()})
+        UIView._removeHandlers.mutate { $0 = [:] }
+        UIView._handlers.mutate { $0 = [:] }
+        UIView._rxHandlers.mutate { $0 = [:] }
     }
     
     @objc private func _callHandler(_ sender: UIGestureRecognizer) {
@@ -162,3 +183,4 @@ extension Hashable {
         return "\(hashValue)"
     }
 }
+
