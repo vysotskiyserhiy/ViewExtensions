@@ -167,7 +167,7 @@ public extension UIView {
 
 // MARK: - Layer properties
 public extension UIView {
-    public var cornerRadius: CGFloat {
+    public var layerCornerRadius: CGFloat {
         set {
             layer.cornerRadius = newValue
         }
@@ -177,7 +177,7 @@ public extension UIView {
         }
     }
     
-    public var borderWidth: CGFloat {
+    public var layerBorderWidth: CGFloat {
         set {
             layer.borderWidth = newValue
         }
@@ -187,7 +187,7 @@ public extension UIView {
         }
     }
     
-    public var borderColor: UIColor? {
+    public var layerBorderColor: UIColor? {
         set {
             layer.borderColor = newValue?.cgColor
         }
