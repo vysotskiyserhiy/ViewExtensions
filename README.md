@@ -6,27 +6,32 @@
 
 ## Example
 
+# Add recognizers
+
 ```swift
-
-// handle any gesture is only one line of code
-
 let view = UIView()
-
-// extend view's tap zone is that easy
-view.padding = 10
 
 view.recognize(.tap) {
     // handle tap
 }
 
 // if you need any additional setup
+
 view.recognize(.longPress, setup: { (gesture) in
-    let longPress = gesture as! UILongPressGestureRecognizer
     // setup
 }, handler: {
     // handle longPress
 })
 
+```
+
+# Extend touches zone
+
+```swift
+view.padding = 10
+```
+
+```swift
 let button = UIButton(type: .infoDark)
 
 // you can set padding to increase button response frame
