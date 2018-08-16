@@ -4,9 +4,9 @@
 [![License](https://img.shields.io/cocoapods/l/ViewExtensions.svg?style=flat)](http://cocoapods.org/pods/ViewExtensions)
 [![Platform](https://img.shields.io/cocoapods/p/ViewExtensions.svg?style=flat)](http://cocoapods.org/pods/ViewExtensions)
 
-## Example
+# Example
 
-# Add recognizers
+## Add recognizers
 
 ```swift
 let view = UIView()
@@ -25,11 +25,13 @@ view.recognize(.longPress, setup: { (gesture) in
 
 ```
 
-# Extend touches zone
+## Extend touches zone
 
 ```swift
 view.padding = 10
 ```
+
+## Same logic for UIButton
 
 ```swift
 let button = UIButton(type: .infoDark)
@@ -38,13 +40,6 @@ let button = UIButton(type: .infoDark)
 button.padding = 20
 
 button.handle(.touchUpInside) {
-    // handle tap
-}
-
-
-let imageView = UIImageView()
-
-imageView.recognize(.tap) {
     // handle tap
 }
 ```
