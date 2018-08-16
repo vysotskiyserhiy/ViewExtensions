@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Atom
 
 // MARK: - Padding
 public extension UIView {
@@ -29,19 +30,19 @@ public extension UIView {
 }
 
 extension UIButton {
-    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+    open override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         return self.point(inside: point)
     }
 }
 
 extension UIImageView {
-    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+    open override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         return self.point(inside: point)
     }
 }
 
 extension UILabel {
-    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+    open override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         return self.point(inside: point)
     }
 }
