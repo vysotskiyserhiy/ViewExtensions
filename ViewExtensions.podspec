@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'ViewExtensions'
-  s.version          = '0.2.0'
+  s.version          = '0.2.1'
   s.summary          = 'UIView Extensions'
   s.homepage         = 'https://github.com/vysotskiyserhiy/ViewExtensions'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
