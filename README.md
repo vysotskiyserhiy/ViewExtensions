@@ -4,8 +4,6 @@
 [![License](https://img.shields.io/cocoapods/l/ViewExtensions.svg?style=flat)](http://cocoapods.org/pods/ViewExtensions)
 [![Platform](https://img.shields.io/cocoapods/p/ViewExtensions.svg?style=flat)](http://cocoapods.org/pods/ViewExtensions)
 
-# Example
-
 ## Add recognizers
 
 ```swift
