@@ -7,7 +7,14 @@
 ## Example
 
 ```swift
+
 // handle any gesture is only one line of code
+
+let view = UIView()
+
+// extend view's tap zone is that easy
+view.padding = 10
+
 view.recognize(.tap) {
     // handle tap
 }
@@ -29,8 +36,6 @@ button.handle(.touchUpInside) {
     // handle tap
 }
 
-// extend view's tap zone is that easy
-view.padding = 10
 
 let imageView = UIImageView()
 
