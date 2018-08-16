@@ -1,15 +1,43 @@
 # ViewExtensions
 
-[![CI Status](http://img.shields.io/travis/vysotskiyserhiy/ViewExtensions.svg?style=flat)](https://travis-ci.org/vysotskiyserhiy/ViewExtensions)
 [![Version](https://img.shields.io/cocoapods/v/ViewExtensions.svg?style=flat)](http://cocoapods.org/pods/ViewExtensions)
 [![License](https://img.shields.io/cocoapods/l/ViewExtensions.svg?style=flat)](http://cocoapods.org/pods/ViewExtensions)
 [![Platform](https://img.shields.io/cocoapods/p/ViewExtensions.svg?style=flat)](http://cocoapods.org/pods/ViewExtensions)
 
 ## Example
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+```swift
+// handle any gesture is only one line of code
+view.recognize(.tap) {
+    // handle tap
+}
 
-## Requirements
+// if you need any additional setup
+view.recognize(.longPress, setup: { (gesture) in
+    let longPress = gesture as! UILongPressGestureRecognizer
+    // setup
+}, handler: {
+    // handle longPress
+})
+
+let button = UIButton(type: .infoDark)
+
+// you can set padding to increase button response frame
+button.padding = 20
+
+button.handle(.touchUpInside) {
+    // handle tap
+}
+
+// extend view's tap zone is that easy
+view.padding = 10
+
+let imageView = UIImageView()
+
+imageView.recognize(.tap) {
+    // handle tap
+}
+```
 
 ## Installation
 
