@@ -1,9 +1,8 @@
 //
-//  ViewExtensions.swift
-//  ViewExtensions
+//  Gestures.swift
+//  
 //
-//  Created by Serhiy Vysotskiy on 21.01.2018.
-//  Copyright © 2018 Serhiy Vysotskiy. All rights reserved.
+//  Created by Serhiy Vysotskiy on 8/16/18.
 //
 
 import UIKit.UIView
@@ -71,7 +70,7 @@ public extension UIView {
     }
     
     func observe(_ gesture: Gesture, setup: (UIGestureRecognizer) -> () = { _ in }) -> Observable<()> {
-//        print("Adding handler on view \(hashString), for gesture \(gesture)")
+        //        print("Adding handler on view \(hashString), for gesture \(gesture)")
         let variable = Variable(())
         
         guard let recognizer = gesture.gesture else {
@@ -89,7 +88,7 @@ public extension UIView {
         
         UIView._removeHandlers.mutate { (val) in
             val[hashString, default: [:]][gesture] = { [weak recognizer, weak self] in
-//                print("Removing handler on view \(self?.hashString ?? "nil"), for gesture \(gesture)")
+                //                print("Removing handler on view \(self?.hashString ?? "nil"), for gesture \(gesture)")
                 recognizer?.removeTarget(self, action: #selector(UIView._callRxHandler(_:)))
             }
         }
@@ -99,7 +98,7 @@ public extension UIView {
     
     @discardableResult
     public func recognize(_ gesture: Gesture, target: Any, action: Selector, setup: (UIGestureRecognizer) -> () = { _ in }) -> UIGestureRecognizer? {
-//        print("Adding handler on view \(hashString), for gesture \(gesture)")
+        //        print("Adding handler on view \(hashString), for gesture \(gesture)")
         guard let recognizer = gesture.gesture else {
             return nil
         }
@@ -111,7 +110,7 @@ public extension UIView {
         
         UIView._removeHandlers.mutate { (val) in
             val[hashString, default: [:]][gesture] = { [weak recognizer] in
-//                print("Removing handler on view \(self?.hashString ?? "nil"), for gesture \(gesture)")
+                //                print("Removing handler on view \(self?.hashString ?? "nil"), for gesture \(gesture)")
                 recognizer?.removeTarget(target, action: action)
             }
         }
@@ -121,7 +120,7 @@ public extension UIView {
     
     @discardableResult
     public func recognize(_ gesture: Gesture, setup: (UIGestureRecognizer) -> () = { _ in }, handler: @escaping () -> ()) -> UIGestureRecognizer? {
-//        print("Adding handler on view \(hashString), for gesture \(gesture)")
+        //        print("Adding handler on view \(hashString), for gesture \(gesture)")
         guard let recognizer = gesture.gesture else {
             return nil
         }
@@ -137,7 +136,7 @@ public extension UIView {
         
         UIView._removeHandlers.mutate { (val) in
             val[hashString, default: [:]][gesture] = { [weak recognizer, weak self] in
-//                print("Removing handler on view \(self?.hashString ?? "nil"), for gesture \(gesture)")
+                //                print("Removing handler on view \(self?.hashString ?? "nil"), for gesture \(gesture)")
                 recognizer?.removeTarget(self, action: #selector(UIView._callHandler(_:)))
             }
         }
@@ -146,7 +145,7 @@ public extension UIView {
     }
     
     func removeRecognizers() {
-//        print("Removing handlers on view \(hashString)")
+        //        print("Removing handlers on view \(hashString)")
         UIView._removeHandlers.mutate { $0.removeValue(forKey: hashString)?.valuesArray.forEach({$0()}) }
         UIView._handlers.mutate { $0[hashString] = [:] }
         UIView._rxHandlers.mutate { $0[hashString] = [:] }
@@ -155,7 +154,7 @@ public extension UIView {
     @objc private func _callHandler(_ sender: UIGestureRecognizer) {
         let gesture = Gesture(gesture: sender)
         UIView._handlers.value[hashString]?[gesture]?()
-//        print("Calling handler on view \(hashString), for gesture \(gesture)")
+        //        print("Calling handler on view \(hashString), for gesture \(gesture)")
     }
     
     @objc private func _callRxHandler(_ sender: UIGestureRecognizer) {
@@ -164,61 +163,23 @@ public extension UIView {
     }
 }
 
-
-// MARK: - Layer properties
-public extension UIView {
-    public var layerCornerRadius: CGFloat {
-        set {
-            layer.cornerRadius = newValue
-        }
-        
-        get {
-            return layer.cornerRadius
-        }
+// MARK: - Same mechanism for UIButton
+public extension UIButton {
+    private static var _handlers: Atomic<[String: () -> ()]> = Atomic([:])
+    
+    public func handle(_ event: UIControlEvents, with action: @escaping () -> ()) {
+        UIButton._handlers.mutate { $0[hashString] = action }
+        addTarget(self, action: #selector(_callButtonHandler), for: event)
     }
     
-    public var layerBorderWidth: CGFloat {
-        set {
-            layer.borderWidth = newValue
-        }
-        
-        get {
-            return layer.borderWidth
-        }
-    }
-    
-    public var layerBorderColor: UIColor? {
-        set {
-            layer.borderColor = newValue?.cgColor
-        }
-        
-        get {
-            return layer.borderColor.map { UIColor(cgColor: $0) }
-        }
+    @objc private func _callButtonHandler() {
+        UIButton._handlers.value[hashString]?()
     }
 }
 
 
-// MARK: - Padding
-public extension UIView {
-    private static var _paddings: Atomic<[String: CGFloat]> = Atomic([:])
-    
-    public var padding: CGFloat {
-        set {
-            UIView._paddings.mutate {
-                $0[hashString] = newValue
-            }
-        }
-        
-        get {
-            return UIView._paddings.value[hashString] ?? 0
-        }
-    }
-    
-    public func point(inside point: CGPoint) -> Bool {
-        return CGRect(x: bounds.origin.x - padding, y: bounds.origin.y - padding, width: bounds.width + 2 * padding, height: bounds.height + 2 * padding).contains(point)
-    }
-}
+
+// support
 
 extension UIView {
     var hashString: String {
