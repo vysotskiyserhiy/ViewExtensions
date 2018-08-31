@@ -118,7 +118,6 @@ public extension UIView {
         //        print("Removing handlers on view \(hashString)")
         UIView._removeHandlers.mutate { $0.removeValue(forKey: hashString)?.valuesArray.forEach({$0()}) }
         UIView._handlers.mutate { $0[hashString] = [:] }
-        UIView._rxHandlers.mutate { $0[hashString] = [:] }
     }
     
     @objc private func _callHandler(_ sender: UIGestureRecognizer) {
