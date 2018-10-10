@@ -6,9 +6,10 @@
 //
 
 import UIKit
-import Atom
+
 
 // MARK: - Padding
+
 public extension UIView {
     private static var _paddings: Atomic<[String: CGFloat]> = Atomic([:])
     
@@ -28,6 +29,10 @@ public extension UIView {
         return CGRect(x: bounds.origin.x - padding, y: bounds.origin.y - padding, width: bounds.width + 2 * padding, height: bounds.height + 2 * padding).contains(point)
     }
 }
+
+
+// MARK: - Override point(inside:event:)
+
 
 extension UIButton {
     open override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
