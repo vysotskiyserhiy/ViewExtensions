@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A7A15E021653D5600FB685C /* ButtonGestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7A15DF21653D5600FB685C /* ButtonGestures.swift */; };
+		2A312500218C801200CB40B1 /* ViewExtensions.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 2A3124FF218C801200CB40B1 /* ViewExtensions.podspec */; };
+		2A7A15E021653D5600FB685C /* UIControlGestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7A15DF21653D5600FB685C /* UIControlGestures.swift */; };
 		2A7A15E221653DD900FB685C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7A15E121653DD900FB685C /* Extensions.swift */; };
 		2AAF3D59215D32EE00BC6400 /* ViewExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 2AAF3D4B215D32EE00BC6400 /* ViewExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2ABE83DA215D33AB0098023A /* Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABE83D7215D33AA0098023A /* Gestures.swift */; };
@@ -17,7 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2A7A15DF21653D5600FB685C /* ButtonGestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonGestures.swift; sourceTree = "<group>"; };
+		2A3124FF218C801200CB40B1 /* ViewExtensions.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ViewExtensions.podspec; sourceTree = SOURCE_ROOT; };
+		2A7A15DF21653D5600FB685C /* UIControlGestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIControlGestures.swift; sourceTree = "<group>"; };
 		2A7A15E121653DD900FB685C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		2AAF3D48215D32EE00BC6400 /* ViewExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ViewExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AAF3D4B215D32EE00BC6400 /* ViewExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewExtensions.h; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 		2AAF3D4A215D32EE00BC6400 /* ViewExtensions */ = {
 			isa = PBXGroup;
 			children = (
+				2A3124FF218C801200CB40B1 /* ViewExtensions.podspec */,
 				2ABE83D6215D33AA0098023A /* Classes */,
 				2AAF3D4B215D32EE00BC6400 /* ViewExtensions.h */,
 				2AAF3D4C215D32EE00BC6400 /* Info.plist */,
@@ -69,7 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				2ABE83D7215D33AA0098023A /* Gestures.swift */,
-				2A7A15DF21653D5600FB685C /* ButtonGestures.swift */,
+				2A7A15DF21653D5600FB685C /* UIControlGestures.swift */,
 				2ABE83D9215D33AA0098023A /* Padding.swift */,
 				2ABE83D8215D33AA0098023A /* LayerProperties.swift */,
 				2ABE83DD215D33E40098023A /* Atom.swift */,
@@ -147,6 +150,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A312500218C801200CB40B1 /* ViewExtensions.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,7 +163,7 @@
 			files = (
 				2ABE83DB215D33AB0098023A /* LayerProperties.swift in Sources */,
 				2A7A15E221653DD900FB685C /* Extensions.swift in Sources */,
-				2A7A15E021653D5600FB685C /* ButtonGestures.swift in Sources */,
+				2A7A15E021653D5600FB685C /* UIControlGestures.swift in Sources */,
 				2ABE83DA215D33AB0098023A /* Gestures.swift in Sources */,
 				2ABE83DE215D33E40098023A /* Atom.swift in Sources */,
 				2ABE83DC215D33AB0098023A /* Padding.swift in Sources */,

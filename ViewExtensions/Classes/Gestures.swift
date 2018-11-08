@@ -29,7 +29,7 @@ extension UIView {
             print("Removing handlers on view \(hashString)")
         }
         
-        UIView._removeHandlers.mutate { $0.removeValue(forKey: hashString)?.valuesArray.forEach({$0()}) }
+        UIView._removeHandlers.mutate { $0.removeValue(forKey: hashString)?.values.forEach({$0()}) }
         UIView._handlers.mutate { $0[hashString] = [:] }
     }
 }

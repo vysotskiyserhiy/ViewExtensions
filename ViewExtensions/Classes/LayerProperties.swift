@@ -9,6 +9,7 @@ import UIKit.UIView
 
 // MARK: - Layer properties
 public extension UIView {
+    @IBInspectable
     public var cornerRadius: CGFloat {
         set {
             layer.cornerRadius = newValue
@@ -19,6 +20,7 @@ public extension UIView {
         }
     }
     
+    @IBInspectable
     public var borderWidth: CGFloat {
         set {
             layer.borderWidth = newValue
@@ -29,6 +31,7 @@ public extension UIView {
         }
     }
     
+    @IBInspectable
     public var borderColor: UIColor? {
         set {
             layer.borderColor = newValue?.cgColor
