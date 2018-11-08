@@ -13,6 +13,7 @@ import UIKit
 public extension UIView {
     private static var _paddings: Atomic<[String: CGFloat]> = Atomic([:])
     
+    @IBInspectable
     public var padding: CGFloat {
         set {
             UIView._paddings.mutate {
