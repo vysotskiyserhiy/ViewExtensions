@@ -41,4 +41,44 @@ public extension UIView {
             return layer.borderColor.map { UIColor(cgColor: $0) }
         }
     }
+    
+    @IBInspectable var shadowRadius: CGFloat {
+        set {
+            layer.shadowRadius = newValue
+        }
+        
+        get {
+            return layer.shadowRadius
+        }
+    }
+
+    @IBInspectable var shadowOffset: CGSize {
+        set {
+            layer.shadowOffset = newValue
+        }
+        
+        get {
+            return layer.shadowOffset
+        }
+    }
+    
+    @IBInspectable var shadowOpacity: Float {
+        set {
+            layer.shadowOpacity = newValue
+        }
+        
+        get {
+            return layer.shadowOpacity
+        }
+    }
+    
+    @IBInspectable var shadowColor: UIColor? {
+        set {
+            layer.shadowColor = newValue?.cgColor
+        }
+        
+        get {
+            return layer.shadowColor.map { UIColor(cgColor: $0) }
+        }
+    }
 }
