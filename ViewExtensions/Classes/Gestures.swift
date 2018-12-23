@@ -11,12 +11,12 @@ let debug = false
 
 // MARK: - Gestures
 extension UIView {
-    private static var _handlers: Atomic<[String: [Gesture: () -> ()]]> = Atomic([:])
+    private static var _handlers: Atomic<[String: [Gesture: (UIGestureRecognizer) -> ()]]> = Atomic([:])
     private static var _removeHandlers: Atomic<[String: [Gesture: () -> ()]]> = Atomic([:])
     
     @objc private func _callHandler(_ sender: UIGestureRecognizer) {
         let gesture = Gesture(gesture: sender)
-        UIView._handlers.value[hashString]?[gesture]?()
+        UIView._handlers.value[hashString]?[gesture]?(sender)
         
         if debug {
             print("Calling handler on view \(hashString), for gesture \(gesture)")
@@ -69,7 +69,7 @@ public extension UIView {
     ///
     /// - Returns: UIGesureRecognizer that handles current gesture
     @discardableResult
-    public func recognize(_ gesture: Gesture, setup: (UIGestureRecognizer) -> () = { _ in }, handler: @escaping () -> ()) -> UIGestureRecognizer? {
+    public func recognize(_ gesture: Gesture, setup: (UIGestureRecognizer) -> () = { _ in }, handler: @escaping (UIGestureRecognizer) -> ()) -> UIGestureRecognizer? {
         if debug {
             print("Adding handler on view \(hashString), for gesture \(gesture)")
         }
@@ -101,7 +101,6 @@ public extension UIView {
     }
 }
 
-
 // MARK: - Gesture
 extension UIView {
     public enum Gesture {
@@ -114,7 +113,7 @@ extension UIView {
         case screenEdgePan
         case none
         
-        init(gesture: UIGestureRecognizer) {
+        fileprivate init(gesture: UIGestureRecognizer) {
             switch gesture {
             case is UITapGestureRecognizer:
                 self = .tap
@@ -135,7 +134,7 @@ extension UIView {
             }
         }
         
-        var gesture: UIGestureRecognizer? {
+        fileprivate var gesture: UIGestureRecognizer? {
             switch self {
             case .tap:
                 return UITapGestureRecognizer()
