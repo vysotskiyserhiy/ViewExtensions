@@ -9,17 +9,16 @@
 ```swift
 let view = UIView()
 
-view.recognize(.tap) {
+view.recognize(.tap) { _ in
     // handle tap
 }
 
 // if you need any additional setup
 
-view.recognize(.longPress, setup: { (gesture) in
-    // setup
-}, handler: {
-    // handle longPress
-})
+view.recognize(.pan) { gesture in
+    let pan = gesture as! UIPanGestureRecognizer
+    // ...
+}
 
 ```
 
