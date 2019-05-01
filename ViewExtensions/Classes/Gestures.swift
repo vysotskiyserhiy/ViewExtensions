@@ -41,7 +41,7 @@ public extension UIView {
     ///
     /// - Returns: UIGesureRecognizer that handles current gesture
     @discardableResult
-    public func recognize(_ gesture: Gesture, target: Any, action: Selector, setup: (UIGestureRecognizer) -> () = { _ in }) -> UIGestureRecognizer? {
+    func recognize(_ gesture: Gesture, target: Any, action: Selector, setup: (UIGestureRecognizer) -> () = { _ in }) -> UIGestureRecognizer? {
         if debug {
             print("Adding handler on view \(hashString), for gesture \(gesture)")
         }
@@ -69,7 +69,7 @@ public extension UIView {
     ///
     /// - Returns: UIGesureRecognizer that handles current gesture
     @discardableResult
-    public func recognize(_ gesture: Gesture, setup: (UIGestureRecognizer) -> () = { _ in }, handler: @escaping (UIGestureRecognizer) -> ()) -> UIGestureRecognizer? {
+    func recognize(_ gesture: Gesture, setup: (UIGestureRecognizer) -> () = { _ in }, handler: @escaping (UIGestureRecognizer) -> ()) -> UIGestureRecognizer? {
         if debug {
             print("Adding handler on view \(hashString), for gesture \(gesture)")
         }

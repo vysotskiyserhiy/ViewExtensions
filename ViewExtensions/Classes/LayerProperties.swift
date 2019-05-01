@@ -10,7 +10,7 @@ import UIKit.UIView
 // MARK: - Layer properties
 public extension UIView {
     @IBInspectable
-    public var cornerRadius: CGFloat {
+    var cornerRadius: CGFloat {
         set {
             layer.cornerRadius = newValue
         }
@@ -21,7 +21,7 @@ public extension UIView {
     }
     
     @IBInspectable
-    public var borderWidth: CGFloat {
+    var borderWidth: CGFloat {
         set {
             layer.borderWidth = newValue
         }
@@ -32,7 +32,7 @@ public extension UIView {
     }
     
     @IBInspectable
-    public var borderColor: UIColor? {
+    var borderColor: UIColor? {
         set {
             layer.borderColor = newValue?.cgColor
         }
@@ -42,7 +42,8 @@ public extension UIView {
         }
     }
     
-    @IBInspectable var shadowRadius: CGFloat {
+    @IBInspectable
+    var shadowRadius: CGFloat {
         set {
             layer.shadowRadius = newValue
         }
@@ -52,7 +53,8 @@ public extension UIView {
         }
     }
 
-    @IBInspectable var shadowOffset: CGSize {
+    @IBInspectable
+    var shadowOffset: CGSize {
         set {
             layer.shadowOffset = newValue
         }
@@ -62,7 +64,8 @@ public extension UIView {
         }
     }
     
-    @IBInspectable var shadowOpacity: Float {
+    @IBInspectable
+    var shadowOpacity: Float {
         set {
             layer.shadowOpacity = newValue
         }
@@ -72,7 +75,8 @@ public extension UIView {
         }
     }
     
-    @IBInspectable var shadowColor: UIColor? {
+    @IBInspectable
+    var shadowColor: UIColor? {
         set {
             layer.shadowColor = newValue?.cgColor
         }

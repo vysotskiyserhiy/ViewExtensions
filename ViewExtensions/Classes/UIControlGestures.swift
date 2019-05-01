@@ -13,7 +13,7 @@ public extension UIControl {
     private static var _handlers: Atomic<[String: () -> ()]> = Atomic([:])
     private static var _animation_handlers: Atomic<[String: () -> ()]> = Atomic([:])
     
-    public func handle(_ event: UIControl.Event, with action: @escaping () -> ()) {
+    func handle(_ event: UIControl.Event, with action: @escaping () -> ()) {
         UIControl._handlers.mutate { $0[hashString] = action }
         addTarget(self, action: #selector(_callControlHandler), for: event)
     }
@@ -23,7 +23,7 @@ public extension UIControl {
         UIControl._animation_handlers.value[hashString]?()
     }
     
-    public func removeHandlers() {
+    func removeHandlers() {
         if debug {
             print("Removing handlers on view \(hashString)")
         }

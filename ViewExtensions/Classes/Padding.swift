@@ -14,7 +14,7 @@ public extension UIView {
     private static var _paddings: Atomic<[String: CGFloat]> = Atomic([:])
     
     @IBInspectable
-    public var padding: CGFloat {
+    var padding: CGFloat {
         set {
             UIView._paddings.mutate {
                 $0[hashString] = newValue
@@ -26,7 +26,7 @@ public extension UIView {
         }
     }
     
-    public func point(inside point: CGPoint) -> Bool {
+    func point(inside point: CGPoint) -> Bool {
         return CGRect(x: bounds.origin.x - padding, y: bounds.origin.y - padding, width: bounds.width + 2 * padding, height: bounds.height + 2 * padding).contains(point)
     }
 }

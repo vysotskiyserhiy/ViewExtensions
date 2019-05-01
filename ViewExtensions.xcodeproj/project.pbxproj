@@ -125,6 +125,7 @@
 				TargetAttributes = {
 					2AAF3D47215D32EE00BC6400 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -134,6 +135,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 2AAF3D3E215D32EE00BC6400;
 			productRefGroup = 2AAF3D49215D32EE00BC6400 /* Products */;
@@ -315,7 +317,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = vysotskiyserhiy.ViewExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -340,7 +342,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = vysotskiyserhiy.ViewExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
