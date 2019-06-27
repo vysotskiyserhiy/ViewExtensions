@@ -1,4 +1,4 @@
-# ViewExtensions
+# ViewExtensions (DEPRECATED. Consider using Handlers, Gestures and Paddings pods)
 
 [![Version](https://img.shields.io/cocoapods/v/ViewExtensions.svg?style=flat)](http://cocoapods.org/pods/ViewExtensions)
 [![License](https://img.shields.io/cocoapods/l/ViewExtensions.svg?style=flat)](http://cocoapods.org/pods/ViewExtensions)
