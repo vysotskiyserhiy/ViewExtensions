@@ -52,7 +52,7 @@ pod 'ViewExtensions'
 
 ## Author
 
-vysotskiyserhiy, vysotskiyserhiy@gmail.com
+Serge Vysotsky
 
 ## License
 
